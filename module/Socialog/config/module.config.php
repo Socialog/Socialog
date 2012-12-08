@@ -29,6 +29,10 @@ return array(
             'Socialog\Entity\Page' => 2,
         ),
     ),
+    
+    'php_ini' => array(
+        'date.timezone' => 'Europe/Amsterdam',
+    ),
 
     /**
      * Doctrine
