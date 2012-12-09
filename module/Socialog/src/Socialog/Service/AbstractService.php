@@ -23,9 +23,7 @@ class AbstractService implements ServiceLocatorAwareInterface, EventManagerAware
     protected $locator;
 
     /**
-     * set service locator
-     *
-     * @param ServiceLocatorInterface $locator
+     * {@inheritDoc}
      */
     public function setServiceLocator(ServiceLocatorInterface $locator)
     {
@@ -33,9 +31,7 @@ class AbstractService implements ServiceLocatorAwareInterface, EventManagerAware
     }
 
     /**
-     * get service locator
-     *
-     * @return ServiceLocatorInterface
+     * {@inheritDoc}
      */
     public function getServiceLocator()
     {

@@ -18,7 +18,7 @@ class Page extends AbstractModel implements EntityInterface
      * @ORM\Column(name="id", type="integer")
      */
     protected $id;
-
+    
     /**
      * @var string
      * @ORM\Column(name="content")
@@ -40,7 +40,7 @@ class Page extends AbstractModel implements EntityInterface
     protected $title;
 
     /**
-     * Filterconfig
+     * InputFilter Config
      */
     protected $inputFilter = array(
         'id' => array(
@@ -109,5 +109,4 @@ class Page extends AbstractModel implements EntityInterface
     {
         $this->title = $title;
     }
-
 }
