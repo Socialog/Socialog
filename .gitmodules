@@ -25,3 +25,6 @@
 [submodule "module/RovakCodeMirror"]
 	path = module/RovakCodeMirror
 	url = https://github.com/Rovak/RovakCodeMirror.git
+[submodule "module/SocialogAnalytics"]
+	path = module/SocialogAnalytics
+	url = https://github.com/Socialog/SocialogAnalytics.git
