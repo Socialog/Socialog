@@ -10,3 +10,6 @@
 [submodule "module/SocialogTumblr"]
 	path = module/SocialogTumblr
 	url = https://github.com/Socialog/SocialogTumblr.git
+[submodule "module/SocialogInstall"]
+	path = module/SocialogInstall
+	url = https://github.com/Socialog/SocialogTumblr.git
