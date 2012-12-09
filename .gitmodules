@@ -19,3 +19,6 @@
 [submodule "module/SocialogCodeMirror"]
 	path = module/SocialogCodeMirror
 	url = https://github.com/Socialog/SocialogCodeMirror.git
+[submodule "module/SocialogDisqus"]
+	path = module/SocialogDisqus
+	url = https://github.com/Socialog/SocialogDisqus.git
