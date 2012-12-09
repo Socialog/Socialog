@@ -1,0 +1,9 @@
+[submodule "SocialogAdmin"]
+	path = SocialogAdmin
+	url = https://github.com/Socialog/SocialogAdmin.git
+[submodule "module/SocialogAdmin"]
+	path = module/SocialogAdmin
+	url = https://github.com/Socialog/SocialogAdmin.git
+[submodule "module/SocialogGithub"]
+	path = module/SocialogGithub
+	url = https://github.com/Socialog/SocialogGithub.git
