@@ -14,7 +14,7 @@ return array(
     'SocialogGithub',
     //'SocialogAnalytics',
     'SocialogTumblr',
-    //'SocialogInstall',
+    'SocialogInstall',
     'SocialogCodeMirror',
     'SocialogDisqus',
 );
