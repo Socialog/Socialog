@@ -22,3 +22,6 @@
 [submodule "module/SocialogDisqus"]
 	path = module/SocialogDisqus
 	url = https://github.com/Socialog/SocialogDisqus.git
+[submodule "module/RovakCodeMirror"]
+	path = module/RovakCodeMirror
+	url = https://github.com/Rovak/RovakCodeMirror.git
