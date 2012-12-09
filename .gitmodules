@@ -1,0 +1,30 @@
+[submodule "SocialogAdmin"]
+	path = SocialogAdmin
+	url = https://github.com/Socialog/SocialogAdmin.git
+[submodule "module/SocialogAdmin"]
+	path = module/SocialogAdmin
+	url = https://github.com/Socialog/SocialogAdmin.git
+[submodule "module/SocialogGithub"]
+	path = module/SocialogGithub
+	url = https://github.com/Socialog/SocialogGithub.git
+[submodule "module/SocialogTumblr"]
+	path = module/SocialogTumblr
+	url = https://github.com/Socialog/SocialogTumblr.git
+[submodule "module/SocialogInstall"]
+	path = module/SocialogInstall
+	url = https://github.com/Socialog/SocialogInstall.git
+[submodule "SocialogCodeMirror"]
+	path = SocialogCodeMirror
+	url = https://github.com/Socialog/SocialogCodeMirror.git
+[submodule "module/SocialogCodeMirror"]
+	path = module/SocialogCodeMirror
+	url = https://github.com/Socialog/SocialogCodeMirror.git
+[submodule "module/SocialogDisqus"]
+	path = module/SocialogDisqus
+	url = https://github.com/Socialog/SocialogDisqus.git
+[submodule "module/RovakCodeMirror"]
+	path = module/RovakCodeMirror
+	url = https://github.com/Rovak/RovakCodeMirror.git
+[submodule "module/SocialogAnalytics"]
+	path = module/SocialogAnalytics
+	url = https://github.com/Socialog/SocialogAnalytics.git
