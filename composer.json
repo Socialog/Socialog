@@ -23,7 +23,6 @@
         "doctrine/migrations": "1.*@dev",
         "doctrine/doctrine-module": "0.5.*@dev",
         "doctrine/data-fixtures": "1.*@dev",
-        "zf-commons/zfc-twig": "dev-master",
         "rovak/codemirror": "dev-master"
     }
 }
