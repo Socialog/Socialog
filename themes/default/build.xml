@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SocialogTheme">
+    <target name="sass">
+        <exec executable="sass" description="Runs SASS for the default theme">
+            <arg value="--watch" />
+            <arg value="scss:public/theme/css" />
+        </exec>
+    </target>
+</project>

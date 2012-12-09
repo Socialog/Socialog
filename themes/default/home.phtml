@@ -1,0 +1,10 @@
+<h1>Header</h1>
+
+<?php foreach ($this->posts as $post): ?>
+	<h2>
+        <a href="<?php echo $this->url('socialog-post', array('id' => $post->getId())); ?>">
+            <?php echo $post->getTitle(); ?>
+        </a>
+        <?php echo $post->getContentHtml(); ?>
+    </h2>
+<?php endforeach; ?>

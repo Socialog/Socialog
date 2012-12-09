@@ -1,9 +1,0 @@
-{% do headtitle(page.title) %}
-
-{% autoescape false %}
-    <article class="page">
-        <h2>{{ page.title }}</h2>
-
-        {{ page.contenthtml }}
-    </article>
-{% endautoescape %}

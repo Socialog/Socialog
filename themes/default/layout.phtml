@@ -1,0 +1,28 @@
+<?php 
+$this->headLink()
+    ->appendStylesheet($this->basePath('theme/css/main.css')); ?>
+
+<?php echo $this->doctype(); ?>
+<html>
+    <head>
+        <?php echo $this->headTitle()->setSeparator(' - '); ?>
+        <?php echo $this->headLink(); ?>
+        <?php echo $this->headScript(); ?>
+    </head>
+    <body>
+		<header class="main-header">
+			<hgroup>
+				<img src="<?php echo $this->profile()->getPhotoUrl(); ?>">
+                <h1><?php echo $this->profile()->getName(); ?></h1>
+                <h2><?php echo $this->profile()->getTagline(); ?></h2>
+			</hgroup>
+            <?php echo $this->partial('default/navigation'); ?>
+		</header>
+
+		<section class="content">
+			<?php echo $this->content; ?>
+		</section>
+
+        <?php echo $this->inlineScript(); ?>
+    </body>
+</html>

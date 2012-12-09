@@ -1,11 +1,11 @@
+@import "reset"; // HTML 5 Reset Sheet
+
 /**
-	Vars
+	Main.css
 **/
 
-@import "reset";
 
 $sidebar-width: 200px;
-
 
 body {
 	color: #404040;
@@ -72,9 +72,6 @@ header.main-header {
 		ul {
 			list-style: none;
 			margin-left: 0;
-
-			li {
-			}
 		}
 
 		a {
