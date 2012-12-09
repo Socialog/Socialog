@@ -25,6 +25,15 @@ class Module implements
     {
         $app = $e->getApplication();
         $sm = $app->getServiceManager();
+        $config = $app->getConfig();
+        
+        // Set configuration options
+        if ($phpSettings = $config['php_ini']) {
+            foreach($phpSettings as $key => $value) {
+                ini_set($key, $value);
+            }
+        }
+        
         $sharedEventManager = $sm->get('SharedEventManager');
 
         // Hook into comments
