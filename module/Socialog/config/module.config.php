@@ -30,6 +30,23 @@ return array(
         ),
     ),
     
+
+    /**
+     * ViewManager
+     */
+    'view_manager' => array(
+        'display_not_found_reason' => true,
+        'display_exceptions'        => true,
+        'doctype'                   => 'HTML5',
+        'not_found_template'        => 'default/error/404',
+        'layout'                    => 'default/layout',
+        'exception_template'        => 'default/error/index',
+        'template_path_stack'       => array(
+            __DIR__ . '/../view',
+            'themes',
+        ),
+    ),
+    
     'php_ini' => array(
         'date.timezone' => 'Europe/Amsterdam',
     ),
@@ -54,16 +71,6 @@ return array(
         ),
     ),
     
-    /**
-     * Twig
-     */
-    'zfctwig' => array(
-        'namespaces' => array(
-            'theme' => __DIR__ . '/../../../themes/default',
-            'base' => __DIR__ . '/../../../themes/base',
-        )
-    ),
-
     /**
      * Asset Manager
      */
@@ -131,21 +138,6 @@ return array(
             'socialog-blog' => 'Socialog\Controller\BlogController',
             'socialog-page' => 'Socialog\Controller\PageController',
             'socialog-post' => 'Socialog\Controller\PostController',
-        ),
-    ),
-
-    /**
-     * ViewManager
-     */
-    'view_manager' => array(
-        'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'doctype' => 'HTML5',
-        'not_found_template' => '@theme/error/404.twig',
-        'layout' => 'layout',
-        'exception_template' => '@theme/error/index.twig',
-        'template_path_stack' => array(
-            __DIR__ . '/../view',
         ),
     ),
 );
