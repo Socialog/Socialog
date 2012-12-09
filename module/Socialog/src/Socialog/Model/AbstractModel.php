@@ -21,6 +21,8 @@ abstract class AbstractModel implements InputFilterAwareInterface
      * @var HydratorInterface
      */
     protected $hydrator;
+    
+    private $this;
 
     /**
      * Validate this model
@@ -29,8 +31,11 @@ abstract class AbstractModel implements InputFilterAwareInterface
      */
     public function isValid()
     {
+        $data = get_object_vars($this);
+        $data['this'] = $this;
+
         $inputFilter = $this->getInputFilter();
-        $inputFilter->setData(get_object_vars($this));
+        $inputFilter->setData($data);
 
         $isValid = $inputFilter->isValid();
 
