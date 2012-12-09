@@ -7,3 +7,6 @@
 [submodule "module/SocialogGithub"]
 	path = module/SocialogGithub
 	url = https://github.com/Socialog/SocialogGithub.git
+[submodule "module/SocialogTumblr"]
+	path = module/SocialogTumblr
+	url = https://github.com/Socialog/SocialogTumblr.git
