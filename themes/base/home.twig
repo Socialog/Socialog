@@ -4,14 +4,11 @@
 {% for post in posts %}
 	<article class="post">
 
-		{% trigger "theme:post.pre" with {'post':post} %}
-
 		{% block post %}
 			<h2>{{ post.title }}</h2>
 			{{ post.content|raw }}
 		{% endblock %}
-
-		{% trigger "theme:post.post" with {'post':post}  %}
+        <br>
 
 	</article>
 {% endfor %}

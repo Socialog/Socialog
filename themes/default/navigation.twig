@@ -3,7 +3,6 @@
 		<li>
 			<a href="{{ url('socialog-blog') }}">Home</a>
 		</li>
-		{% trigger "theme:menu" %}
 		{% for page in pages %}
 			<li>
 				<a href="{{ url('socialog-page', {'id':page.id}) }}">{{ page.title }}</a>
