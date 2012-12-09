@@ -13,3 +13,9 @@
 [submodule "module/SocialogInstall"]
 	path = module/SocialogInstall
 	url = https://github.com/Socialog/SocialogInstall.git
+[submodule "SocialogCodeMirror"]
+	path = SocialogCodeMirror
+	url = https://github.com/Socialog/SocialogCodeMirror.git
+[submodule "module/SocialogCodeMirror"]
+	path = module/SocialogCodeMirror
+	url = https://github.com/Socialog/SocialogCodeMirror.git
