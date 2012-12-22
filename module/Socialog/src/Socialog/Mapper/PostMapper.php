@@ -52,7 +52,7 @@ class PostMapper extends AbstractDoctrineMapper
         $this->triggerEvent('save', array(
             'post' => $post
         ));
-
+        
         $this->getEntityManager()->persist($post);
         $this->getEntityManager()->flush($post);
     }

@@ -2,14 +2,17 @@
 
 namespace Socialog\Entity;
 
-use Socialog\Model\AbstractModel;
 use Doctrine\ORM\Mapping as ORM;
+use Socialog\Model\AbstractModel;
+use Socialog\Model\ArticleInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="pages")
  */
-class Page extends AbstractModel implements EntityInterface
+class Page extends AbstractModel implements 
+    EntityInterface,
+    ArticleInterface
 {
 
     /**
@@ -18,7 +21,7 @@ class Page extends AbstractModel implements EntityInterface
      * @ORM\Column(name="id", type="integer")
      */
     protected $id;
-    
+
     /**
      * @var string
      * @ORM\Column(name="content")
@@ -32,12 +35,16 @@ class Page extends AbstractModel implements EntityInterface
     protected $contentHtml;
 
     /**
-     * Page Title
-     *
      * @var string
      * @ORM\Column(name="title")
      */
     protected $title;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="allow_comments", type="boolean")
+     */
+    protected $allowComments = true;
 
     /**
      * InputFilter Config
@@ -51,6 +58,9 @@ class Page extends AbstractModel implements EntityInterface
         ),
         'content' => array(
             'required' => true,
+        ),
+        'allow_comments' => array(
+            'required' => false,
         ),
     );
 
@@ -77,7 +87,7 @@ class Page extends AbstractModel implements EntityInterface
     {
         $this->content = $content;
     }
-    
+
     /**
      * @return string
      */
@@ -85,7 +95,7 @@ class Page extends AbstractModel implements EntityInterface
     {
         return $this->contentHtml;
     }
-    
+
     /**
      * @param string $contentHtml
      */
@@ -109,4 +119,24 @@ class Page extends AbstractModel implements EntityInterface
     {
         $this->title = $title;
     }
+
+    /**
+     * Set if comments are allowed for the current post
+     * @param boolean $allowed
+     */
+    public function setAllowComments($allowed)
+    {
+        $this->allowComments = (boolean) $allowed;
+    }
+
+    /**
+     * If commenting is allowed
+     * 
+     * @return boolean
+     */
+    public function getAllowComments()
+    {
+        return $this->allowComments;
+    }
+
 }

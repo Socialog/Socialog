@@ -5,10 +5,7 @@ namespace Socialog;
 return array(
     'factories' => array(
         'triggerevent' => function($sm) {
-            $sm = $sm->getServiceLocator();
-            $triggerEvent = new View\Helper\TriggerEvent();
-            $triggerEvent->setEventManager($sm->get('EventManager'));
-            return $triggerEvent;
+            return new View\Helper\TriggerEvent($sm->getServiceLocator());
         },
         'profile' => function($sm) {
             $sm = $sm->getServiceLocator();

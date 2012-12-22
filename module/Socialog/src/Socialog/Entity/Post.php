@@ -2,15 +2,17 @@
 
 namespace Socialog\Entity;
 
-use Socialog\Model\AbstractModel;
 use Doctrine\ORM\Mapping as ORM;
+use Socialog\Model\AbstractModel;
+use Socialog\Model\ArticleInterface;
 
 /**
- * Post
  * @ORM\Entity
  * @ORM\Table(name="posts")
  */
-class Post extends AbstractModel implements EntityInterface
+class Post extends AbstractModel implements 
+    EntityInterface,
+    ArticleInterface
 {
 
     const STATUS_PUBLISHED = 1;
@@ -47,6 +49,12 @@ class Post extends AbstractModel implements EntityInterface
      * @ORM\Column(name="status", type="integer")
      */
     protected $status;
+    
+    /**
+     * @var boolean
+     * @ORM\Column(name="allow_comments", type="boolean")
+     */
+    protected $allowComments = true;
 
     /**
      * Filterconfig
@@ -72,6 +80,9 @@ class Post extends AbstractModel implements EntityInterface
         ),
         'content' => array(
             'required' => true,
+        ),
+        'allow_comments' => array(
+            'required' => false,
         ),
     );
 
@@ -148,5 +159,47 @@ class Post extends AbstractModel implements EntityInterface
     {
         $this->status = (int) $status;
     }
+    
+    /**
+     * Set if comments are allowed for the current post
+     * @param boolean $allowed
+     */
+    public function setAllowComments($allowed)
+    {
+        $this->allowComments = (boolean)$allowed;
+    }
+    
+    /**
+     * If commenting is allowed
+     * 
+     * @return boolean
+     */
+    public function getAllowComments()
+    {
+        return $this->allowComments;
+    }
+    
+    /**
+     * Get the contents before a pagebreak
+     * 
+     * @return string
+     */
+    public function getHeadline()
+    {
+        $pos = strpos($this->getContentHtml(), '<!--pagebreak-->');
+        
+        if ($pos > 0) {
+            return substr($this->getContentHtml(), 0, $pos);
+        }
 
+        return $this->getContentHtml();
+    }
+    
+    /**
+     * 
+     */
+    public function hasBreak() 
+    {
+        return strpos($this->getContentHtml(), '<!--pagebreak-->') !== -1;
+    }
 }

@@ -41,6 +41,21 @@ class Module implements
             $viewRenderer = $sm->get('ViewRenderer');
             return $viewRenderer->partial('socialog/comment/post', $e->getParams());
         });
+
+        // Hook into comments
+        $sharedEventManager->attach('view', 'navigation.render', function($e) use ($sm) {
+            /* @var $pageMapper \Socialog\Mapper\PageMapper */
+            $pageMapper = $sm->get('socialog_page_mapper');
+            $result = "";
+            
+            foreach ($pageMapper->findAllPages() as $page) {
+                $result.= new Theme\Menuitem($page->getTitle(), $e->getTarget()->url('socialog-page', array(
+                    'id' => $page->getId(),
+                )));
+            }
+            
+            return $result;
+        });
     }
 
     /**

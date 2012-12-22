@@ -2,41 +2,94 @@
 
 namespace Socialog\View\Helper;
 
-use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\Event;
+use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Helper\AbstractHelper;
 
-class TriggerEvent extends AbstractHelper implements EventManagerAwareInterface
+class TriggerEvent extends AbstractHelper
 {
     /**
-     * @var EventManagerInterface
+     * @var EventManager|null
      */
-    protected $events;
+    protected $events = array();
 
     /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
+
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function __construct(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
+    /**
+     * Set the event manager instance used by this context
+     *
+     * @param EventManagerInterface $events
+     * @return Trigger
+     */
+    public function setEventManager(EventManagerInterface $events, $alias)
+    {
+        $this->events[$alias] = $events;
+        return $this;
+    }
+
+    /**
+     * Retrieve the event manager
+     * Lazy-loads an EventManager instance if none registered.
+     *
+     * @param string $alias The alias of the class/EventManager on which to trigger the event
      * @return EventManagerInterface
      */
-    public function getEventManager()
+    public function events($alias)
     {
-        return $this->events;
+        if (!isset($this->events[$alias]) || !($this->events[$alias] instanceof EventManagerInterface)) {
+            $this->setEventManager(new EventManager(array(
+                __CLASS__,
+                get_called_class(),
+                $alias
+            )), $alias);
+            $sharedManager = $this->serviceLocator->get('SharedEventManager');
+            $this->events[$alias]->setSharedManager($sharedManager);
+        }
+        return $this->events[$alias];
     }
 
     /**
-     * @param EventManagerInterface $eventManager
-     */
-    public function setEventManager(EventManagerInterface $eventManager)
-    {
-        $eventManager->setIdentifiers('render');
-        $this->events = $eventManager;
-    }
-
-    /**
-     * @param type $eventName
-     * @param type $argv
+     * Triggers the specified event on the defined context and return a concateneted string with the results
+     *
+     * @param string $eventName
+     * @param mixed $target
+     * @param array $argv
+     * @return string
      */
     public function __invoke($eventName, $argv = array())
     {
-        $this->getEventManager()->trigger($eventName, $this->getView(), $argv);
-    }
+        $alias = 'view';
+        if (strpos($eventName, ':')!==false){
+            $aux = explode(':', $eventName);
+            $alias = $aux[0];
+            $eventName = $aux[1];
+        }
 
+        //init the event with the target, params and name
+        $event = new Event();
+        $event->setTarget($this->getView());
+        $event->setParams($argv);
+        $event->setName($eventName);
+        $content = "";
+        //trigger the event listeners
+        $responses = $this->events($alias)->trigger($eventName, $event);
+        //merge all results and return the response
+        foreach ($responses as $response) {
+            $content .= $response;
+        }
+        return $content;
+    }
 }

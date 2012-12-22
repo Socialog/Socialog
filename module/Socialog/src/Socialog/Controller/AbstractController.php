@@ -12,10 +12,7 @@ class AbstractController extends AbstractActionController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $sm = $this->getServiceLocator();
-        
-        $layout = $this->layout();
-        $layout->pages = $sm->get('socialog_page_mapper')->findAllPages();
+        $this->layout('default/layout');
 
         parent::onDispatch($e);
     }
