@@ -30,7 +30,21 @@ return array(
         ),
     ),
     
-
+    /**
+     * Navigation
+     */
+    'navigation' => array(
+        'socialog' => array(
+            'home' => array(
+                'label' => 'Blog',
+                'route' => 'socialog-blog',
+            ),
+            'code' => array(
+                'label' => 'Code',
+                'route' => 'socialog-blog',
+            ),
+        ),
+    ),
     /**
      * ViewManager
      */

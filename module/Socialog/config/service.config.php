@@ -20,6 +20,9 @@ return array(
     ),
 
     'factories' => array(
+        
+        'socialog-navigation' => 'Socialog\Service\NavigationFactory',
+        
         'socialog_cache' => function($sm) {
             $config = $sm->get('Config');
             $storage = StorageFactory::factory(array(
@@ -57,7 +60,7 @@ return array(
     ),
 
     'initializers' => array(
-        'socialog_db' => function($instance, $sm) {
+        'socialog_em' => function($instance, $sm) {
             if ($instance instanceof Mapper\AbstractDoctrineMapper) {
                 $instance->setEntityManager($sm->get('socialog_orm'));
             }
