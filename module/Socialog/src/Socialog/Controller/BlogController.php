@@ -39,15 +39,17 @@ class BlogController extends AbstractController
  
         $viewModel->posts = $posts
             // Group by Year
-            ->groupBy(function($element){
-                return $element->getDate()->format('Y'); 
-            })
-            // Group by Month
-            ->map(function($element){
-                return $element->groupBy(function($element){
+            ->groupBy(
+                // Group by Year
+                function($element){
+                    return $element->getDate()->format('Y'); 
+                },
+                // Group by Month
+                function($element){
                     return $element->getDate()->format('M');
                 });
-            });
+                
+//        var_dump($viewModel->posts);
 
         return $viewModel;
     }
