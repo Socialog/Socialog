@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     /**
      * Socialog
      */
@@ -29,7 +28,6 @@ return array(
             'Socialog\Entity\Page' => 2,
         ),
     ),
-    
     /**
      * Navigation
      */
@@ -38,11 +36,20 @@ return array(
             'home' => array(
                 'label' => 'Blog',
                 'route' => 'socialog-blog',
+                'pages' => array(
+                    'post' => array(
+                        'route' => 'socialog-post'
+                    ),
+                ),
             ),
-            'code' => array(
-                'label' => 'Code',
-                'route' => 'socialog-blog',
-            ),
+//            'projects' => array(
+//                'label' => 'projects',
+//                'route' => 'socialog-page',
+//                'action' => 'view',
+//                'params' => array(
+//                    'id' => 3,
+//                ),
+//            )
         ),
     ),
     /**
@@ -50,21 +57,19 @@ return array(
      */
     'view_manager' => array(
         'display_not_found_reason' => true,
-        'display_exceptions'        => true,
-        'doctype'                   => 'HTML5',
-        'not_found_template'        => 'default/error/404',
-        'layout'                    => 'default/layout',
-        'exception_template'        => 'default/error/index',
-        'template_path_stack'       => array(
+        'display_exceptions' => true,
+        'doctype' => 'HTML5',
+        'not_found_template' => 'default/error/404',
+        'layout' => 'default/layout',
+        'exception_template' => 'default/error/index',
+        'template_path_stack' => array(
             __DIR__ . '/../view',
             'themes',
         ),
     ),
-    
     'php_ini' => array(
         'date.timezone' => 'Europe/Amsterdam',
     ),
-
     /**
      * Doctrine
      */
@@ -84,14 +89,15 @@ return array(
             ),
         ),
     ),
-    
+
     /**
      * Asset Manager
      */
     'asset_manager' => array(
         'resolver_configs' => array(
             'paths' => array(
-                'theme' => __DIR__ . '/../../../themes/default/public',
+                'theme' => 'themes/default/public',
+                'publicdata' => 'data/public',
             ),
         ),
     ),
@@ -111,7 +117,16 @@ return array(
                     ),
                 ),
             ),
-
+            'socialog-archive' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/archive',
+                    'defaults' => array(
+                        'controller' => 'socialog-blog',
+                        'action' => 'archive',
+                    ),
+                ),
+            ),
             'socialog-page' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -126,7 +141,6 @@ return array(
                     ),
                 ),
             ),
-
             'socialog-post' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -143,7 +157,6 @@ return array(
             ),
         ),
     ),
-
     /**
      * Controller
      */

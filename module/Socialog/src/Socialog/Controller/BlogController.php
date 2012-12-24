@@ -2,6 +2,8 @@
 
 namespace Socialog\Controller;
 
+use Socialog\Collections\ArrayCollection;
+use Socialog\Mapper\PostMapper;
 use Zend\View\Model\ViewModel;
 
 class BlogController extends AbstractController
@@ -18,21 +20,34 @@ class BlogController extends AbstractController
         return $viewModel;
     }
 
-    public function postAction()
+    /**
+     * Post Archive
+     * 
+     * @return ViewModel
+     */
+    public function archiveAction()
     {
-        $viewModel = new ViewModel;
-        $viewModel->setTemplate('post');
+        $sl = $this->getServiceLocator(); 
+        
+        /* @var $postMapper \Socialog\Mapper\PostMapper */
+        $postMapper = $sl->get('socialog_post_mapper');
 
-        $viewModel->comments = array(
-            array(
-                'name' => 'Roy',
-                'comment' => 'Dit is een test comment 1',
-            ),
-            array(
-                'name' => 'Roy',
-                'comment' => 'Dit is een test comment 2',
-            ),
-        );
+        $viewModel = new ViewModel;
+        $viewModel->setTemplate('default/archive');
+     
+        $posts = new ArrayCollection($postMapper->getRepository()->findAll());
+ 
+        $viewModel->posts = $posts
+            // Group by Year
+            ->groupBy(function($element){
+                return $element->getDate()->format('Y'); 
+            })
+            // Group by Month
+            ->map(function($element){
+                return $element->groupBy(function($element){
+                    return $element->getDate()->format('M');
+                });
+            });
 
         return $viewModel;
     }
