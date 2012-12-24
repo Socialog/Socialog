@@ -28,4 +28,15 @@ class UserMapper extends AbstractDoctrineMapper
     {
         return $this->getRepository()->findOneByUsername($username);
     }
+
+    /**
+     * Find a user by unique id
+     * 
+     * @param integer $id
+     * @return \Socialog\Entity\User
+     */
+    public function findById($id)
+    {
+        return $this->getRepository()->find($id);
+    }
 }
