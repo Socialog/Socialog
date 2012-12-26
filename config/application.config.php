@@ -11,9 +11,10 @@ return array(
         // Configuration
         'config_glob_paths' => array(
             'config/autoload/{,*.}{global,local}.{php,ini}',
+            'config/autoload/' . APP_ENVIRONMENT . '/{,*.}{global,local}.{php,ini}',
         ),
 //		'config_cache_enabled' => TRUE,
 //		'cache_dir'			=> 'data/cache',
-//		'config_cache_key'	=> 'production',
+//		'config_cache_key'	=> APP_ENVIRONMENT,
     ),
 );
