@@ -1,6 +1,25 @@
 RewriteEngine On
+
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
+
+# 1 WEEK
+<filesMatch ".(jpg|jpeg|png|gif|swf)$">
+    Header set Cache-Control "max-age=604800, public"
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteRule ^(.*)$ /socialog/public/output/$1 [L]
+</filesMatch>
+
+# 2 DAYS
+<filesMatch ".(xml|txt|css|js)$">
+    Header set Cache-Control "max-age=172800, proxy-revalidate"
+</filesMatch>
+
+# 1 MIN
+<filesMatch ".(html|htm|php)$">
+    Header set Cache-Control "max-age=60, private, proxy-revalidate"
+</filesMatch>
+
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
