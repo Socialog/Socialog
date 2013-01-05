@@ -10,7 +10,7 @@ use Zend\EventManager\ResponseCollection;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class AbstractService implements ServiceLocatorAwareInterface, EventManagerAwareInterface
+abstract class AbstractService implements ServiceLocatorAwareInterface, EventManagerAwareInterface
 {
     /**
      * @var EventManagerInterface
