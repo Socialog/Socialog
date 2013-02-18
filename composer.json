@@ -19,10 +19,10 @@
         "php": ">=5.3.3",
         "zendframework/zendframework": "2.*",
         "rwoverdijk/assetmanager": "1.*",
-        "doctrine/doctrine-orm-module": "0.5.*@alpha",
-        "doctrine/migrations": "1.*@dev",
-        "doctrine/doctrine-module": "0.5.*@dev",
-        "doctrine/data-fixtures": "1.*@dev",
+        "doctrine/doctrine-orm-module": "0.*",
+        "doctrine/doctrine-module": "0.*",
+        "doctrine/migrations": "dev-master",
+        "doctrine/data-fixtures": "dev-master",
         "rovak/codemirror": "dev-master"
     }
 }
