@@ -45,6 +45,18 @@ class PostMapper extends AbstractDoctrineMapper
     }
 
     /**
+     * Find a post by slug
+     *
+     * @param string $slug
+     * @return \Socialog\Entity\Post
+     */
+    public function findBySlug($slug)
+    {
+        return $this->getRepository()->findOneBySlug($slug);
+    }
+
+
+    /**
      * @param \Socialog\Entity\Post $post
      */
     public function save(PostEntity $post)
@@ -52,7 +64,7 @@ class PostMapper extends AbstractDoctrineMapper
         $this->triggerEvent('save', array(
             'post' => $post
         ));
-        
+
         $this->getEntityManager()->persist($post);
         $this->getEntityManager()->flush($post);
     }

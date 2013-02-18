@@ -25,17 +25,7 @@ return array(
         
         'socialog_cache' => function($sm) {
             $config = $sm->get('Config');
-            $storage = StorageFactory::factory(array(
-                'adapter' => $config['socialog']['cache'],
-                'plugins' => array(
-                    array(
-                        'name' => 'serializer',
-                        'options' => array(
-                            'serializer' => 'Zend\Serializer\Adapter\PhpCode',
-                        ),
-                    ),
-                ),
-            ));
+            $storage = StorageFactory::factory($config['socialog']['cache']);
             return $storage;
         },
 

@@ -2,6 +2,7 @@
 
 namespace Socialog\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Socialog\Model\AbstractModel;
 use Socialog\Model\ArticleInterface;
@@ -10,13 +11,15 @@ use Socialog\Model\ArticleInterface;
  * @ORM\Entity
  * @ORM\Table(name="posts")
  */
-class Post extends AbstractModel implements 
+class Post extends AbstractModel implements
     EntityInterface,
     ArticleInterface
 {
 
     const STATUS_PUBLISHED = 1;
     const STATUS_DRAFT = 2;
+
+    const PAGEBREAK = '<!--pagebreak-->';
 
     /**
      * @var integer
@@ -25,6 +28,11 @@ class Post extends AbstractModel implements
      * @ORM\Column(name="id", type="integer")
      */
     protected $id;
+
+    /**
+     * @ORM\Column(name="slug", type="string")
+     */
+    protected $slug;
 
     /**
      * @var string
@@ -49,12 +57,18 @@ class Post extends AbstractModel implements
      * @ORM\Column(name="status", type="integer")
      */
     protected $status;
-    
+
     /**
      * @var boolean
      * @ORM\Column(name="allow_comments", type="boolean")
      */
     protected $allowComments = true;
+
+    /**
+     * @var DateTime
+     * @ORM\Column(name="date", type="datetime")
+     */
+    protected $date;
 
     /**
      * Filterconfig
@@ -86,6 +100,11 @@ class Post extends AbstractModel implements
         ),
     );
 
+    public function __construct()
+    {
+        $this->date = new DateTime;
+    }
+
     /**
      * @return integer
      */
@@ -107,6 +126,8 @@ class Post extends AbstractModel implements
      */
     public function setTitle($title)
     {
+        $this->setSlug($title);
+
         $this->title = trim($title);
     }
 
@@ -141,17 +162,17 @@ class Post extends AbstractModel implements
     {
         $this->content_html = $content_html;
     }
-    
+
     /**
      * Status
-     * 
+     *
      * @return integer
      */
     public function getStatus()
     {
         return $this->status;
     }
-    
+
     /**
      * @param integer $status
      */
@@ -159,7 +180,7 @@ class Post extends AbstractModel implements
     {
         $this->status = (int) $status;
     }
-    
+
     /**
      * Set if comments are allowed for the current post
      * @param boolean $allowed
@@ -168,38 +189,77 @@ class Post extends AbstractModel implements
     {
         $this->allowComments = (boolean)$allowed;
     }
-    
+
     /**
      * If commenting is allowed
-     * 
+     *
      * @return boolean
      */
     public function getAllowComments()
     {
         return $this->allowComments;
     }
-    
+
+    /**
+     * @return DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set the publish date
+     *
+     * @param DateTime $date
+     */
+    public function setDate(DateTime $date)
+    {
+        $this->date = $date;
+    }
+
     /**
      * Get the contents before a pagebreak
-     * 
+     *
      * @return string
      */
     public function getHeadline()
     {
-        $pos = strpos($this->getContentHtml(), '<!--pagebreak-->');
-        
+        $pos = strpos($this->getContentHtml(), self::PAGEBREAK);
+
         if ($pos > 0) {
             return substr($this->getContentHtml(), 0, $pos);
         }
 
         return $this->getContentHtml();
     }
-    
+
     /**
-     * 
+     * Verify if the text contains a break
+     *
+     * @return boolean
      */
-    public function hasBreak() 
+    public function hasBreak()
     {
-        return strpos($this->getContentHtml(), '<!--pagebreak-->') !== -1;
+        return false !== strpos($this->getContentHtml(), self::PAGEBREAK);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $slug = strtolower($slug);
+        $slug = str_replace(' ', '-', $slug);
+
+        $this->slug = $slug;
     }
 }

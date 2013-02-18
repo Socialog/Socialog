@@ -12,10 +12,10 @@ use Socialog\Entity\EntityInterface;
 class CommentMapper extends AbstractDoctrineMapper
 {
     protected $entityName = 'Socialog\Entity\Comment';
-    
+
     /**
      * Return all comments by a given Entity
-     * 
+     *
      * @param \Socialog\Entity\EntityInterface $entity
      * @return array
      * @throws Exception
@@ -24,20 +24,20 @@ class CommentMapper extends AbstractDoctrineMapper
     {
         $sl = $this->getServiceLocator();
         $config = $sl->get('config');
-        
+
         $entityClassname = get_class($entity);
-        
+
         if ( ! isset($config['socialog']['entity_type'][$entityClassname])) {
             throw new Exception('Unknown entity type given: ' . $entityClassname );
         }
-        
+
         $typeId = $config['socialog']['entity_type'][$entityClassname];
-        
+
         return $this->getRepository()->findBy(
             array(
                 'entityId'      => $entity->getId(),
                 'entityType'    => $typeId,
-            ), 
+            ),
             array('date' => 'DESC')
         );
     }

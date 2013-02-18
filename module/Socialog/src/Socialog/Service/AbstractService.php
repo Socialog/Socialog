@@ -10,7 +10,9 @@ use Zend\EventManager\ResponseCollection;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-abstract class AbstractService implements ServiceLocatorAwareInterface, EventManagerAwareInterface
+abstract class AbstractService implements
+    ServiceLocatorAwareInterface,
+    EventManagerAwareInterface
 {
     /**
      * @var EventManagerInterface
@@ -77,7 +79,8 @@ abstract class AbstractService implements ServiceLocatorAwareInterface, EventMan
      */
     public function setEventManager(EventManagerInterface $events)
     {
-        $events->setIdentifiers(array(__CLASS__, get_called_class()));
+        $identifies = array(__CLASS__, get_called_class());
+        $events->setIdentifiers($identifies);
         $this->events = $events;
         $this->attachDefaultListeners();
 

@@ -12,7 +12,9 @@ class AbstractController extends AbstractActionController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $this->layout('default/layout');
+        $layout = $this->layout();
+        $layout->setTemplate('default/layout');
+        $layout->bodyCls = '';
 
         parent::onDispatch($e);
     }

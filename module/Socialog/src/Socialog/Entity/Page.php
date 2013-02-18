@@ -10,7 +10,7 @@ use Socialog\Model\ArticleInterface;
  * @ORM\Entity
  * @ORM\Table(name="pages")
  */
-class Page extends AbstractModel implements 
+class Page extends AbstractModel implements
     EntityInterface,
     ArticleInterface
 {
@@ -131,12 +131,11 @@ class Page extends AbstractModel implements
 
     /**
      * If commenting is allowed
-     * 
+     *
      * @return boolean
      */
     public function getAllowComments()
     {
         return $this->allowComments;
     }
-
 }
